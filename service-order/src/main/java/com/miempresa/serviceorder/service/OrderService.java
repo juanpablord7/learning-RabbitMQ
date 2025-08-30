@@ -19,7 +19,6 @@ public class OrderService {
     private RabbitSender rabbitSender;
 
     public List<Order> getAllOrder(){
-        rabbitSender.sendMessage("Hello second microservice");
 
         return orderRepository.findAll();
     }
@@ -32,6 +31,8 @@ public class OrderService {
                 .build();
 
         Order order = orderRepository.save(newOrder);
+
+        rabbitSender.sendMessage(order);
 
         return order;
     }

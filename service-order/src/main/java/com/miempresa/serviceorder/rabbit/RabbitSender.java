@@ -1,5 +1,6 @@
 package com.miempresa.serviceorder.rabbit;
 
+import com.miempresa.serviceorder.model.Order;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -12,8 +13,8 @@ public class RabbitSender {
         this.rabbitTemplate = rabbitTemplate;
     }
 
-    public void sendMessage(String message){
-        rabbitTemplate.convertAndSend("orderQueue", message);
-        System.out.println("Sent message: " + message);
+    public void sendMessage(Order order){
+        rabbitTemplate.convertAndSend("orderQueue", order);
+        System.out.println("Sent message: " + order);
     }
 }
